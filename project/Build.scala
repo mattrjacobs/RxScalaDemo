@@ -28,7 +28,7 @@ object RxScalaDemoBuild extends Build {
     baseSettings ++ formatSettings ++ Defaults.itSettings ++ Seq(
       resolvers := Seq(scalaToolsRepo, sonatypeRepo, typesafeRepo),
       scalacOptions ++= Seq("-encoding", "UTF-8", "-deprecation", "-unchecked"),
-      libraryDependencies ++= Seq(Compile.jodaTime, Test.specs2, Test.mockito),
+      libraryDependencies ++= Seq(Compile.jodaTime, Compile.rxJavaCore, Compile.rxJavaScala, Test.specs2, Test.mockito),
       ivyLoggingLevel in ThisBuild := UpdateLogging.Quiet
     )
   }
@@ -54,6 +54,7 @@ object Dependency {
     val JodaTime = "2.1"
     val Logback = "1.0.3"
     val Mockito = "1.9.0"
+    val RxJava = "0.14.2"
     val Specs2 = "1.11"
   }
 
@@ -64,6 +65,8 @@ object Dependency {
   object Compile {
     val jodaConvert =    "org.joda"                  %  "joda-convert"      % V.JodaConvert
     val jodaTime =       "joda-time"                 %  "joda-time"         % V.JodaTime
+    val rxJavaCore =     "com.netflix.rxjava"        %  "rxjava-core"       % V.RxJava
+    val rxJavaScala =    "com.netflix.rxjava"        %  "rxjava-scala"      % V.RxJava
   }
 
   object Test {
