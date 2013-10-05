@@ -28,7 +28,7 @@ object RxScalaDemoBuild extends Build {
     baseSettings ++ formatSettings ++ Defaults.itSettings ++ Seq(
       resolvers := Seq(scalaToolsRepo, sonatypeRepo, typesafeRepo),
       scalacOptions ++= Seq("-encoding", "UTF-8", "-deprecation", "-unchecked"),
-      libraryDependencies ++= Seq(Compile.jodaTime, Compile.rxJavaCore, Compile.rxJavaScala, Compile.rxApacheHttp, Test.specs2, Test.mockito),
+      libraryDependencies ++= Seq(Compile.jodaTime, Compile.rxJavaCore, Compile.rxJavaScala, Compile.rxApacheHttp, Compile.hystrix, Test.specs2, Test.mockito),
       ivyLoggingLevel in ThisBuild := UpdateLogging.Quiet
     )
   }
@@ -50,6 +50,7 @@ object RxScalaDemoBuild extends Build {
 
 object Dependency {
   object V {
+    val Hystrix = "1.3.6"
     val JodaConvert = "1.2"
     val JodaTime = "2.1"
     val Logback = "1.0.3"
@@ -63,6 +64,7 @@ object Dependency {
   }
 
   object Compile {
+    val hystrix =        "com.netflix.hystrix"       %  "hystrix-core"      % V.Hystrix
     val jodaConvert =    "org.joda"                  %  "joda-convert"      % V.JodaConvert
     val jodaTime =       "joda-time"                 %  "joda-time"         % V.JodaTime
     val rxApacheHttp =   "com.netflix.rxjava"        %  "rxjava-apache-http" % V.RxJava
