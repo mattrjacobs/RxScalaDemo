@@ -2,7 +2,7 @@ package com.mattrjacobs.rxscalademo
 
 import rx.lang.scala.Observable
 
-trait Slide70 extends App {
+trait Slide71 extends App {
   trait Video {
     val videoId: Long
   }
@@ -14,7 +14,6 @@ trait Slide70 extends App {
     (ex: Throwable) => {
       println("Error")
       ex.printStackTrace
-    },
-    () => println("Completed"))
+    })
 }
 
