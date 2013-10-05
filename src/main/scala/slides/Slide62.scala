@@ -6,8 +6,7 @@ import rx.lang.scala.{ Observable, Observer }
 
 trait Slide62 extends App {
 
-  case class VideoRating(userId: Long, videoId: Long, rating: Double)
-
+  type VideoRating
   val executor: Executor
   def getRatingFromNetwork(userId: Long, videoId: Long): VideoRating
 
