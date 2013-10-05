@@ -2,7 +2,7 @@ package com.mattrjacobs.rxscalademo
 
 import rx.lang.scala.Observable
 
-trait Slide75 extends App {
+trait Slide83 extends App {
   type SomeData
 
   def getDataA(): Observable[SomeData]
@@ -11,7 +11,7 @@ trait Slide75 extends App {
   val a: Observable[SomeData] = getDataA()
   val b: Observable[SomeData] = getDataB()
 
-  a.merge(b).subscribe(
-    (element: SomeData) => println("data: " + element))
+  a.zip(b).subscribe(
+    pair => println("a: " + pair._1 + " b: " + pair._2))
 }
 
