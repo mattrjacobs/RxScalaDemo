@@ -1,3 +1,5 @@
+package com.mattrjacobs.rxscalademo
+
 import scala.concurrent.Future
 
 trait Slide28 extends App {

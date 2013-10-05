@@ -1,3 +1,5 @@
+package com.mattrjacobs.rxscalademo
+
 import rx.lang.scala.Observable
 
 trait Slide29 extends App {
