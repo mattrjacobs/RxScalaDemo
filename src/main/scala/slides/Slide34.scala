@@ -1,4 +1,4 @@
-package com.mattrjacobs.rxscalademo
+package com.mattrjacobs.rxscala.slides
 
 trait Slide34 extends App {
   def getData: Iterable[String]

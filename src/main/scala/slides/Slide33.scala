@@ -1,4 +1,4 @@
-package com.mattrjacobs.rxscalademo
+package com.mattrjacobs.rxscala.slides
 
 trait Slide33 extends App {
   def getData: String

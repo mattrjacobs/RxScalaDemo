@@ -1,4 +1,4 @@
-package com.mattrjacobs.rxscalademo
+package com.mattrjacobs.rxscala.slides
 
 import java.util.concurrent.Executor
 import rx.subscriptions.Subscriptions

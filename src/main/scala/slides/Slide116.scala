@@ -1,4 +1,4 @@
-package com.mattrjacobs.rxscalademo
+package com.mattrjacobs.rxscala.slides
 
 import org.apache.http.HttpResponse
 import org.apache.http.nio.client.HttpAsyncClient

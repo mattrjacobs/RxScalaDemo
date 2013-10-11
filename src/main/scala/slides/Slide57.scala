@@ -1,4 +1,4 @@
-package com.mattrjacobs.rxscalademo
+package com.mattrjacobs.rxscala.slides
 
 import rx.subscriptions.Subscriptions
 import rx.lang.scala.{ Observable, Observer }
