@@ -28,7 +28,7 @@ object RxScalaDemoBuild extends Build {
     baseSettings ++ formatSettings ++ Defaults.itSettings ++ Seq(
       resolvers := Seq(scalaToolsRepo, sonatypeRepo, typesafeRepo),
       scalacOptions ++= Seq("-encoding", "UTF-8", "-deprecation", "-unchecked"),
-      libraryDependencies ++= Seq(Compile.jodaTime, Compile.rxJavaCore, Compile.rxJavaScala, Compile.rxApacheHttp, Compile.hystrix, Test.specs2, Test.mockito),
+      libraryDependencies ++= Seq(Compile.jodaTime, Compile.jodaConvert, Compile.rxJavaCore, Compile.rxJavaScala, Compile.rxApacheHttp, Compile.hystrix, Test.specs2, Test.mockito),
       ivyLoggingLevel in ThisBuild := UpdateLogging.Quiet
     )
   }
@@ -57,6 +57,7 @@ object Dependency {
     val Mockito = "1.9.0"
     val RxJava = "0.14.2"
     val Specs2 = "1.11"
+    val Spray = "1.2-M8"
   }
 
   object Runtime {
