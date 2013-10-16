@@ -28,7 +28,7 @@ trait Slide141 extends App {
           Map("position" -> b.get("position")))
         val rating = videoService.getRating(video, userId).map(r =>
           Map("rating" -> r.get("rating")))
-        Observable.zip(List(metadata, bookmark, rating)).map {
+        Observable.zip(Observable(List(metadata, bookmark, rating): _*)).map {
           case m :: b :: r :: Nil =>
             Map("id" -> video.id) ++ m ++ b ++ r
         }

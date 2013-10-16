@@ -5,7 +5,7 @@ import org.apache.http.impl.nio.client.{ CloseableHttpAsyncClient, HttpAsyncClie
 import org.apache.http.nio.client.methods.HttpAsyncMethods
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
-import com.mattrjacobs.rxscala.http.{ ObservableHttp, ObservableHttpResponse }
+import rx.apache.http._
 import rx.lang.scala.{ Observable, Observer, Subscription }
 import scala.util.parsing.json.JSON
 
@@ -46,7 +46,7 @@ trait TwitterClient extends OAuthSupport {
         Observable(tweets: _*)
       }
       case Some(m: Map[_, _]) =>
-        Observable.just(m.asInstanceOf[Map[String, Any]])
+        Observable(m.asInstanceOf[Map[String, Any]])
       case _ => Observable.never
     })
   }

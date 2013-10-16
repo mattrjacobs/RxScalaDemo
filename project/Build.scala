@@ -56,7 +56,7 @@ object Dependency {
     val JodaTime = "2.1"
     val Logback = "1.0.3"
     val Mockito = "1.9.0"
-    val RxJava = "0.14.2"
+    val RxJava = "0.14.4"
     val Specs2 = "1.11"
     val Spray = "1.2-M8"
   }

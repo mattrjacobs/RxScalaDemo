@@ -28,9 +28,9 @@ trait Slide154 extends App {
   }
 
   val user: Observable[User] =
-    new Observable(new GetUserCommand(userId).observe())
+    Observable(new GetUserCommand(userId).observe())
   val geo: Observable[Geo] =
-    new Observable(new GetGeoCommand(request).observe())
+    Observable(new GetGeoCommand(request).observe())
 
   user.zip(geo).map {
     case (u, g) => Map("username" -> u.username,

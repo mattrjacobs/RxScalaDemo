@@ -24,7 +24,7 @@ trait Slide112 extends App {
           resp.getContent.map((bb: Array[Byte]) => new String(bb))
         s
       })
-  new Observable(httpObservable).toBlockingObservable.foreach(
+  Observable(httpObservable).toBlockingObservable.foreach(
     (s: String) => System.out.println(s))
 }
 
