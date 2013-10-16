@@ -1,4 +1,4 @@
-package com.mattrjacobs.rxscala.java;
+package com.mattrjacobs.rxscala.javaconsumer;
 
 import com.mattrjacobs.rxscala.Producer;
 import rx.Observable;
