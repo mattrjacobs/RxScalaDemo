@@ -2,20 +2,20 @@ package com.mattrjacobs.rxscala
 
 import java.util.concurrent.CountDownLatch
 import rx.lang.scala.{ Observable, Observer, Subscription }
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
 import scala.util.{ Failure, Success }
 
-object FutureWrapper {
+trait FutureWrapper {
 
-  def toObservable[T](futureT: Future[T]): Observable[T] =
+  def toObservable[T](futureT: scala.concurrent.Future[T]): Observable[T] =
     Observable((observer: Observer[T]) => {
+      import scala.concurrent.ExecutionContext.Implicits.global
+
       futureT.onComplete {
         case Success(t) => {
           observer.onNext(t)
           observer.onCompleted()
         }
-        case Failure(ex: Throwable) => observer.onError(ex)
+        case Failure(ex) => observer.onError(ex)
       }
 
       //no present way to cancel a Scala future
@@ -23,26 +23,26 @@ object FutureWrapper {
       NoSubscription()
     })
 
-  def main(args: Array[String]) = {
-    println("Starting the FutureWrapper")
+  def toObservable[T](futureT: com.twitter.util.Future[T]): Observable[T] =
+    Observable((observer: Observer[T]) => {
+      futureT.onSuccess {
+        t =>
+          {
+            observer.onNext(t)
+            observer.onCompleted()
+          }
+      }.onFailure {
+        ex => observer.onError(ex)
+      }
 
-    val latch = new CountDownLatch(2)
+      new Subscription {
+        override def unsubscribe() =
+          futureT.raise(new com.twitter.util.FutureCancelledException)
+      }
+    })
 
-    val successFuture: Future[Int] = Future {
-      Thread.sleep(1000)
-      3
-    }
-
-    val failureFuture: Future[Int] = Future {
-      Thread.sleep(1000)
-      throw new RuntimeException("future failed!")
-      3
-    }
-
-    val successObservable = toObservable(successFuture)
-    val failureObservable = toObservable(failureFuture)
-
-    successObservable.subscribe(
+  protected def subscribeTo(a: Observable[Int], b: Observable[Int], latch: CountDownLatch) = {
+    a.subscribe(
       (i: Int) => println("A onNext : " + i),
       (ex: Throwable) => {
         println("A onError : " + ex)
@@ -53,7 +53,7 @@ object FutureWrapper {
         latch.countDown()
       })
 
-    failureObservable.subscribe(
+    b.subscribe(
       (i: Int) => println("B onNext : " + i),
       (ex: Throwable) => {
         println("B onError : " + ex)
@@ -63,13 +63,11 @@ object FutureWrapper {
         println("B onCompleted")
         latch.countDown()
       })
-
-    latch.await()
   }
+}
 
-  object NoSubscription {
-    def apply() = new Subscription {
-      override def unsubscribe() = {}
-    }
+object NoSubscription {
+  def apply() = new Subscription {
+    override def unsubscribe() = {}
   }
 }

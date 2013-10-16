@@ -28,7 +28,7 @@ object RxScalaDemoBuild extends Build {
     baseSettings ++ formatSettings ++ Defaults.itSettings ++ Seq(
       resolvers := Seq(scalaToolsRepo, sonatypeRepo, typesafeRepo),
       scalacOptions ++= Seq("-encoding", "UTF-8", "-deprecation", "-unchecked"),
-      libraryDependencies ++= Seq(Compile.jodaTime, Compile.jodaConvert, Compile.rxJavaCore, Compile.rxJavaScala, Compile.rxApacheHttp, Compile.joauth, Compile.hystrix, Test.specs2, Test.mockito),
+      libraryDependencies ++= Seq(Compile.jodaTime, Compile.jodaConvert, Compile.rxJavaCore, Compile.rxJavaScala, Compile.rxApacheHttp, Compile.joauth, Compile.hystrix, Compile.twitterUtil, Test.specs2, Test.mockito),
       ivyLoggingLevel in ThisBuild := UpdateLogging.Quiet
     )
   }
@@ -59,6 +59,7 @@ object Dependency {
     val RxJava = "0.14.4"
     val Specs2 = "1.11"
     val Spray = "1.2-M8"
+    val TwitterUtil = "6.1.0"
   }
 
   object Runtime {
@@ -73,6 +74,7 @@ object Dependency {
     val rxApacheHttp =   "com.netflix.rxjava"        %  "rxjava-apache-http" % V.RxJava
     val rxJavaCore =     "com.netflix.rxjava"        %  "rxjava-core"       % V.RxJava
     val rxJavaScala =    "com.netflix.rxjava"        %  "rxjava-scala"      % V.RxJava
+    val twitterUtil =    "com.twitter"               %% "util-core"         % V.TwitterUtil
   }
 
   object Test {
