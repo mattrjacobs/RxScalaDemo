@@ -12,7 +12,7 @@ object TwitterStreamingClient extends TwitterClient {
 
     try {
       val request: ObservableHttp[ObservableHttpResponse] =
-        getRequest(TWITTER_USER_STREAM_URI, "OAuth oauth_consumer_key=\"ix3M2MWX1ircNSudKLpVcw\", oauth_nonce=\"9a62da240e9a8a7e3c0f5606623c9bf3\", oauth_signature=\"sqk4zE%2BeHSqRqqWzbV%2F73hT%2FwYE%3D\", oauth_signature_method=\"HMAC-SHA1\", oauth_timestamp=\"1381928265\", oauth_token=\"6463862-NLQ9vwfqZBjX5hyVzDwzktYLeICfdknLIr1yutjbUg\", oauth_version=\"1.0\"")
+        getRequest(TWITTER_USER_STREAM_URI, "OAuth oauth_consumer_key=\"ix3M2MWX1ircNSudKLpVcw\", oauth_nonce=\"9875fd624a61f431c5a756f8d7fd1c71\", oauth_signature=\"GjkjuV8ycqKu4WqpB%2FmbrZTp1zc%3D\", oauth_signature_method=\"HMAC-SHA1\", oauth_timestamp=\"1381979943\", oauth_token=\"6463862-NLQ9vwfqZBjX5hyVzDwzktYLeICfdknLIr1yutjbUg\", oauth_version=\"1.0\"")
 
       val obs: rx.Observable[ObservableHttpResponse] = request.toObservable
       val scalaObs: Observable[ObservableHttpResponse] = Observable(obs)

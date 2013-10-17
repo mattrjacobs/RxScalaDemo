@@ -20,7 +20,9 @@ trait FutureWrapper {
 
       //no present way to cancel a Scala future
       //http://stackoverflow.com/questions/16009837/how-to-cancel-future-in-scala
-      NoSubscription()
+      new Subscription {
+        override def unsubscribe() = {}
+      }
     })
 
   def toObservable[T](futureT: com.twitter.util.Future[T]): Observable[T] =
@@ -66,8 +68,3 @@ trait FutureWrapper {
   }
 }
 
-object NoSubscription {
-  def apply() = new Subscription {
-    override def unsubscribe() = {}
-  }
-}
