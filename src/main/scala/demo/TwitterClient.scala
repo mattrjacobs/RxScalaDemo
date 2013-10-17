@@ -52,25 +52,6 @@ trait TwitterClient extends OAuthSupport {
     })
   }
 
-  protected def getMentions(l: List[Any]): Observable[Mention] = Observable(
-    (observer: Observer[Mention]) => {
-      try {
-        l.foreach {
-          case m: Map[_, _] => {
-            val mention = getMention(m.asInstanceOf[Map[String, Any]])
-            observer.onNext(mention)
-          }
-        }
-        observer.onCompleted()
-      } catch {
-        case ex: Throwable => observer.onError(ex)
-      }
-
-      new Subscription {
-        override def unsubscribe() = {}
-      }
-    })
-
   protected def getMention(m: Map[String, Any]): Mention = {
     val userMap: Map[String, Any] = m("user").asInstanceOf[Map[String, Any]]
     val name = userMap("name").asInstanceOf[String]
