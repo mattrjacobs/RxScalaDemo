@@ -17,14 +17,11 @@ object TwitterRestClient extends TwitterClient {
     println("Twitter REST client starting!")
 
     try {
-      val request: ObservableHttp[ObservableHttpResponse] =
-        getRequest(TWITTER_USER_MENTIONS_REST_URI, "OAuth oauth_consumer_key=\"ix3M2MWX1ircNSudKLpVcw\", oauth_nonce=\"e8965178c1e927af4380fab3bc227a96\", oauth_signature=\"nuh7sKJ66yumgLZHy45ulqc0Zac%3D\", oauth_signature_method=\"HMAC-SHA1\", oauth_timestamp=\"1381928205\", oauth_token=\"6463862-NLQ9vwfqZBjX5hyVzDwzktYLeICfdknLIr1yutjbUg\", oauth_version=\"1.0\"")
-
-      val obs: rx.Observable[ObservableHttpResponse] = request.toObservable
-      val scalaObs: Observable[ObservableHttpResponse] = Observable(obs)
+      val response: Observable[ObservableHttpResponse] =
+        getResponse(TWITTER_USER_MENTIONS_REST_URI, "OAuth oauth_consumer_key=\"ix3M2MWX1ircNSudKLpVcw\", oauth_nonce=\"e8965178c1e927af4380fab3bc227a96\", oauth_signature=\"nuh7sKJ66yumgLZHy45ulqc0Zac%3D\", oauth_signature_method=\"HMAC-SHA1\", oauth_timestamp=\"1381928205\", oauth_token=\"6463862-NLQ9vwfqZBjX5hyVzDwzktYLeICfdknLIr1yutjbUg\", oauth_version=\"1.0\"")
 
       val mentionObs: Observable[Mention] = for {
-        httpResp <- scalaObs
+        httpResp <- response
         jsonMap <- getJson(httpResp)
       } yield getMention(jsonMap)
 

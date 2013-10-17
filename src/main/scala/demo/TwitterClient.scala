@@ -29,12 +29,13 @@ trait TwitterClient extends OAuthSupport {
 
   val timeParser = DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss Z yyyy")
 
-  def getRequest(uri: String, oauthHeader: String) = {
+  def getResponse(uri: String, oauthHeader: String): Observable[ObservableHttpResponse] = {
     val apacheReq = new HttpGet(uri)
     apacheReq.setHeader("Authorization", oauthHeader)
     apacheReq.setHeader("Accept", "*/*")
     val apacheAsyncReq = HttpAsyncMethods.create(apacheReq)
-    ObservableHttp.createRequest(apacheAsyncReq, client)
+    val observableHttp = ObservableHttp.createRequest(apacheAsyncReq, client)
+    Observable(observableHttp.toObservable)
   }
 
   protected def getJson(httpResp: ObservableHttpResponse): Observable[Map[String, Any]] = {
