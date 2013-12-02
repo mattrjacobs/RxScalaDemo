@@ -11,7 +11,7 @@ import scala.util.parsing.json.JSON
 
 case class Mention(time: DateTime, name: String, screenName: String, picture: String)
 
-trait TwitterClient extends OAuthSupport {
+trait TwitterClient {
   val TWITTER_REST_API_HOST = "https://api.twitter.com"
   val TWITTER_STREAMING_API_HOST = "https://userstream.twitter.com"
   val MENTIONS_REST_PATH = "/1.1/statuses/mentions_timeline.json"

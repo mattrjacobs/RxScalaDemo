@@ -17,7 +17,6 @@ object TwitterRestClient extends TwitterClient {
         //OAuth header from: https://dev.twitter.com/docs/api/1.1/get/statuses/mentions_timeline.
         //Remember to escape your quotes!
         getResponse(TWITTER_USER_MENTIONS_REST_URI, "fill_this_in_with_oauth_header")
-      
 
       val mentionObs: Observable[Mention] = for {
         httpResp <- response
